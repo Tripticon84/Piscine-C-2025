@@ -6,14 +6,12 @@ SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 int running = 1;
 GameState currentGameState = GAME_STATE_MENU;
-int currentLevel = 1; // Niveau actuel
 
 char *pathToFile = NULL;
 
 int initGame() {
     // Initialiser SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        fprintf("debug.txt", SDL_GetError());
         return 1;
     }
 
@@ -40,7 +38,7 @@ int initGame() {
     }
 
     // Initialiser le menu principal
-    //   initMenu();
+    initMenu();
 
 
     SDL_Delay(10000);

@@ -17,6 +17,7 @@ add_executable(Nocturne src/main.c
         src/config.c
         src/include/config.h
         src/board.c
-        src/include/board.h)
+        src/menu.c
+        src/include/menu.h)
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})

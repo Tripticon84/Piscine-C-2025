@@ -6,6 +6,9 @@
 #include <string.h>
 #include <time.h>
 #include <SDL.h>
+#include <SDL_ttf.h>
+#include "menu.h"
+
 
 // Variables globales
 extern SDL_Window *window;
@@ -15,10 +18,14 @@ extern int running;
 
 typedef enum {
     GAME_STATE_MENU,
-    GAME_STATE_LOCAL_SETUP,
-
-
-    GAME_STATE_PLAYING,
+    GAME_STATE_LOCAL_MODE,
+    GAME_STATE_PLACE_P1,
+    GAME_STATE_PLACE_P2,
+    GAME_STATE_PLAY_P1,
+    GAME_STATE_WAIT_P2,
+    GAME_STATE_PLAY_P2,
+    GAME_STATE_WAIT_P1,
+    GAME_STATE_OVER,
 } GameState;
 
 typedef struct Position {
