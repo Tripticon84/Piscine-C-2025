@@ -22,7 +22,7 @@ int initGame() {
     window = SDL_CreateWindow("Bataille neuval",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
-                              792, 612,
+                              1200, 600,
                               SDL_WINDOW_SHOWN);
     if (!window) {
         printf("Erreur creation fenetre: %s\n", SDL_GetError());
@@ -170,7 +170,7 @@ void cleanupGame() {
   */
 
     // Nettoyer SDL
-    // SDL_DestroyRenderer(renderer);
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }

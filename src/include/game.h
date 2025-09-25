@@ -15,6 +15,9 @@ extern int running;
 
 typedef enum {
     GAME_STATE_MENU,
+    GAME_STATE_LOCAL_SETUP,
+
+
     GAME_STATE_PLAYING,
 } GameState;
 
