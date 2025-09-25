@@ -10,13 +10,13 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR})
 
 add_executable(Nocturne src/main.c
-        src/game/game.c
-        src/game/game.h
-        src/directory/display.c
-        src/directory/display.h
-        src/config/config.c
-        src/config/config.h
-        src/board/board.c
-        src/board/board.h)
+        src/game.c
+        src/include/game.h
+        src/display.c
+        src/include/display.h
+        src/config.c
+        src/include/config.h
+        src/board.c
+        src/include/board.h)
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})

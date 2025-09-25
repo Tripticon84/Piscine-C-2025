@@ -1,0 +1,5 @@
+#ifndef NOCTURNE_GAME_H
+#define NOCTURNE_GAME_H
+
+
+#endif //NOCTURNE_GAME_H
