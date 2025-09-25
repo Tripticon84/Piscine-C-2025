@@ -1,0 +1,4 @@
+#ifndef NOCTURNE_CONFIG_H
+#define NOCTURNE_CONFIG_H
+
+#endif //NOCTURNE_CONFIG_H
