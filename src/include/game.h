@@ -8,6 +8,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include "menu.h"
+#include  "local_mode.h"
+#include "place.h"
 
 
 // Variables globales
@@ -27,6 +29,8 @@ typedef enum {
     GAME_STATE_WAIT_P1,
     GAME_STATE_OVER,
 } GameState;
+
+extern GameState currentGameState;
 
 typedef struct Position {
     int x;

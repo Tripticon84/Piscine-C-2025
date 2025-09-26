@@ -24,6 +24,10 @@ add_executable(Nocturne src/main.c
         src/include/config.h
         src/board.c
         src/menu.c
-        src/include/menu.h)
+        src/include/menu.h
+        src/local_mode.c
+        src/include/local_mode.h
+        src/place.c
+        src/include/place.h)
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_TTF_LIBRARY})

@@ -7,6 +7,7 @@ SDL_Renderer *renderer = NULL;
 int running = 1;
 GameState currentGameState = GAME_STATE_MENU;
 
+
 char *pathToFile = NULL;
 
 int initGame() {
@@ -41,32 +42,29 @@ int initGame() {
     initMenu();
 
 
-    SDL_Delay(10000);
-
-
     return 0;
 }
 
-/*
+
 void gameLoop() {
     GameState previousGameState = currentGameState;
 
     while (running) {
         if (previousGameState != currentGameState) {
             // Changement d'état du jeu
-            if (previousGameState == GAME_STATE_MENU && currentGameState == GAME_STATE_SETTINGS) {
+            if (previousGameState == GAME_STATE_MENU && currentGameState == GAME_STATE_LOCAL_MODE) {
                 // On ouvre le menu des paramètres depuis le menu principal
                 cleanupMenu();
-                initSettingsMenu();
-            } else if (previousGameState == GAME_STATE_SETTINGS && currentGameState == GAME_STATE_MENU) {
-                // On retourne au menu principal depuis les paramètres
-                cleanupSettingsMenu();
+                initLocalMode();
+            } else if (previousGameState == GAME_STATE_LOCAL_MODE && currentGameState == GAME_STATE_MENU) {
+                // On retourne au menu principal
+                cleanupLocalMode();
                 initMenu();
-            } else if (previousGameState == GAME_STATE_PLAYING && currentGameState == GAME_STATE_MENU) {
+            } else if (previousGameState == GAME_STATE_LOCAL_MODE && currentGameState == GAME_STATE_PLACE_P1) {
                 // Si on retourne au menu principal depuis le jeu (pas implémenté ici, juste un exemple)
-                cleanupPlayer();
-                cleanupLevel();
-                initMenu();
+                cleanupLocalMode();
+                initPlace();
+                /*
             } else if (previousGameState == GAME_STATE_MENU && currentGameState == GAME_STATE_EDITOR_LEVEL_NAME) {
                 // On ouvre l'éditeur de niveau depuis le menu principal
                 cleanupMenu();
@@ -92,6 +90,7 @@ void gameLoop() {
                 cleanupSaveMenu();
                 initPlayer();
                 loadLevel(save.levelPath);
+                */
             }
             previousGameState = currentGameState;
         }
@@ -106,47 +105,45 @@ void gameLoop() {
                 SDL_RenderPresent(renderer);
                 break;
 
-            case GAME_STATE_SETTINGS:
-                handleSettingsMenuInput();
-                updateSettingsMenu();
+            case GAME_STATE_LOCAL_MODE:
+                handleLocalMode();
+                updateLocalMode();
 
                 SDL_RenderClear(renderer);
-                drawSettingsMenu();
+                drawLocalMode();
                 SDL_RenderPresent(renderer);
                 break;
-
-            case GAME_STATE_PLAYING:
-                handleInput();
-                updatePlayer();
+            case GAME_STATE_PLACE_P1:
+                handlePlaceInput();
+                updatePlace();
 
                 SDL_RenderClear(renderer);
-                drawLevel();
-                drawPlayer();
+                drawPlace();
                 SDL_RenderPresent(renderer);
                 break;
+            /*
+                                 case GAME_STATE_EDITOR_LEVEL_NAME:
+                                     handleEditorLevelNameInput();
 
-            case GAME_STATE_EDITOR_LEVEL_NAME:
-                handleEditorLevelNameInput();
+                                     SDL_RenderClear(renderer);
+                                     drawEditorLevelName();
+                                     SDL_RenderPresent(renderer);
+                                     break;
+                                 case GAME_STATE_EDITOR:
+                                     handleEditorInput();
 
-                SDL_RenderClear(renderer);
-                drawEditorLevelName();
-                SDL_RenderPresent(renderer);
-                break;
-            case GAME_STATE_EDITOR:
-                handleEditorInput();
+                                     SDL_RenderClear(renderer);
+                                     drawEditor();
+                                     SDL_RenderPresent(renderer);
+                                     break;
+                                 case GAME_STATE_SAVE_MENU:
+                                     handleSaveMenuInput();
+                                     updateSaveMenu();
 
-                SDL_RenderClear(renderer);
-                drawEditor();
-                SDL_RenderPresent(renderer);
-                break;
-            case GAME_STATE_SAVE_MENU:
-                handleSaveMenuInput();
-                updateSaveMenu();
-
-                SDL_RenderClear(renderer);
-                drawSaveMenu();
-                SDL_RenderPresent(renderer);
-                break;
+                                     SDL_RenderClear(renderer);
+                                     drawSaveMenu();
+                                     SDL_RenderPresent(renderer);
+                                     break;*/
             default:
                 break;
         }
@@ -154,7 +151,7 @@ void gameLoop() {
         SDL_Delay(16); // ~60 FPS
     }
 }
-*/
+
 void cleanupGame() {
     // Nettoyer selon l'état
     /*  if (currentGameState == GAME_STATE_PLAYING) {

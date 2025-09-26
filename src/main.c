@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Boucle principale du jeu
-    // gameLoop();
+    gameLoop();
 
     // Quitter proprement
     cleanupGame();

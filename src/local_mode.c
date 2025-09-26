@@ -1,11 +1,11 @@
-#include "include/menu.h"
+#include "include/local_mode.h"
 
 #define MAX_BUTTONS 2
 static Button buttons[MAX_BUTTONS];
 static int selectedButton = 0;
 static TTF_Font *font = NULL;
 
-void initMenu() {
+void initLocalMode() {
     if (TTF_Init() == -1) {
         printf("Erreur TTF init: %s\n", TTF_GetError());
         return;
@@ -18,11 +18,11 @@ void initMenu() {
     }
 
     const char *buttonTexts[MAX_BUTTONS] = {
-        "Play",
-        "Quit"
+        "Placement Auto",
+        "Placement Manuel",
     };
 
-    int buttonWidth = 300;
+    int buttonWidth = 350;
     int buttonHeight = 80;
     int spacing = 40;
     int totalHeight = MAX_BUTTONS * buttonHeight + (MAX_BUTTONS - 1) * spacing;
@@ -39,7 +39,7 @@ void initMenu() {
 }
 
 
-void handleMenuInput() {
+void handleLocalMode() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
@@ -58,7 +58,7 @@ void handleMenuInput() {
                 case SDLK_SPACE:
                     if (selectedButton == 0) {
                         // Play
-                        currentGameState = GAME_STATE_LOCAL_MODE;
+                        currentGameState = GAME_STATE_PLACE_P1;
                     } else if (selectedButton == 1) {
                         // Quit
                         SDL_Log("Quitter le jeu");
@@ -66,7 +66,7 @@ void handleMenuInput() {
                     }
                     break;
                 case SDLK_ESCAPE:
-                    running = 0;
+                    currentGameState = GAME_STATE_MENU;
                     break;
                 default: break;
             }
@@ -78,7 +78,7 @@ void handleMenuInput() {
                     if (x >= buttons[i].rect.x && x <= buttons[i].rect.x + buttons[i].rect.w &&
                         y >= buttons[i].rect.y && y <= buttons[i].rect.y + buttons[i].rect.h) {
                         if (i == 0) {
-                            currentGameState = GAME_STATE_LOCAL_MODE;
+                            currentGameState = GAME_STATE_PLACE_P1;
                         } else if (i == 1) {
                             running = 0;
                         }
@@ -89,13 +89,13 @@ void handleMenuInput() {
     }
 }
 
-void updateMenu() {
+void updateLocalMode() {
     for (int i = 0; i < MAX_BUTTONS; i++) {
         buttons[i].isSelected = (i == selectedButton);
     }
 }
 
-void drawMenu() {
+void drawLocalMode() {
     for (int i = 0; i < MAX_BUTTONS; i++) {
         SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
         if (buttons[i].isSelected) {
@@ -133,7 +133,7 @@ void drawMenu() {
     }
 }
 
-void cleanupMenu() {
+void cleanupLocalMode() {
     if (font) {
         TTF_CloseFont(font);
         font = NULL;
